@@ -34,6 +34,13 @@
   <button id="submit-btn">Submit Rating</button>
   <p id="status-msg"></p>
 
+  <!-- Hidden initially -->
+  <div id="ratings-link" style="margin-top: 20px; display: none; text-align: center;">
+    <a href="ratings.html">
+      <button style="padding: 10px 20px; font-size: 16px;">See the Ratings</button>
+    </a>
+  </div>
+
   <script>
     document.getElementById('submit-btn').addEventListener('click', () => {
       const yoghurt = document.getElementById('yoghurt-select').value;
@@ -53,6 +60,7 @@
         if (response.ok) {
           document.getElementById('status-msg').textContent = 'Thanks for your rating!';
           document.getElementById('submit-btn').disabled = true;
+          document.getElementById('ratings-link').style.display = 'block';
         } else {
           throw new Error('Network response was not OK');
         }
@@ -64,4 +72,3 @@
   </script>
 </body>
 </html>
-
