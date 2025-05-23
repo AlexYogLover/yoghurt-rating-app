@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yoghurt Ratings - Results</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    caption {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>All Yoghurt Ratings</h1>
+  <p>Below are all the submitted ratings, sorted by most recent first.</p>
+  <table>
+    <caption>Yoghurt Rating Submissions</caption>
+    <thead>
+      <tr>
+        <th>Yoghurt</th>
+        <th>Rating</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody id="ratings-table-body">
+      <tr><td colspan="3">Loading...</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    fetch('/ratings-db')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.getElementById('ratings-table-body');
+        tbody.innerHTML = '';
+
+        if (data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3">No ratings found.</td></tr>';
+          return;
+        }
+
+        data.forEach(entry => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${entry.yoghurt}</td>
+            <td>${entry.rating}</td>
+            <td>${new Date(entry.timestamp).toLocaleString()}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching ratings:', error);
+        document.getElementById('ratings-table-body').innerHTML =
+          '<tr><td colspan="3">Failed to load ratings.</td></tr>';
+      });
+  </script>
+</body>
+</html>
