@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yoghurt Rating</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header style="text-align: center; margin-bottom: 20px;">
+    <img src="c37a5d29-6045-472a-9910-c064b2428081.png" alt="Yoghurt Rating Logo" style="height: 120px; display: block; margin: 0 auto 10px;" />
+    <h1>Rate Your Favourite Yoghurt!</h1>
+  </header>
+
+  <label for="yoghurt-select">Choose a yoghurt:</label>
+  <select id="yoghurt-select">
+    <option>Müller Corner Strawberry Yogurt</option>
+    <option>Yeo Valley Organic Natural Yogurt</option>
+    <option>Alpro Soya Yogurt Plain</option>
+    <option>Danone Activia Vanilla Yogurt</option>
+    <option>Onken Biopot Strawberry Yogurt</option>
+  </select>
+
+  <div class="rating-container">
+    <p>Give it a rating:</p>
+    <div class="stars" id="star-group">
+      <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+      <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+      <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+      <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+      <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+  </div>
+
+  <button id="submit-btn">Submit Rating</button>
+  <p id="status-msg"></p>
+
+  <script>
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      const yoghurt = document.getElementById('yoghurt-select').value;
+      const rating = document.querySelector('input[name="rating"]:checked')?.value;
+
+      if (!rating) {
+        document.getElementById('status-msg').textContent = 'Please select a rating!';
+        return;
+      }
+
+      fetch('/submit-rating', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ yoghurt, rating }),
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('status-msg').textContent = 'Thanks for your rating!';
+          document.getElementById('submit-btn').disabled = true;
+        } else {
+          throw new Error('Network response was not OK');
+        }
+      })
+      .catch(() => {
+        document.getElementById('status-msg').textContent = 'Error submitting rating.';
+      });
+    });
+  </script>
+</body>
+</html>
+

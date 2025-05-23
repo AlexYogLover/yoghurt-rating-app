@@ -1,0 +1,78 @@
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  background: #fef6ff;
+  margin: 0;
+  padding: 40px;
+  color: #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  background: #ffccf9;
+  color: #8a0073;
+  font-size: 2.2rem;
+  padding: 15px 30px;
+  border-radius: 25px;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+select {
+  font-size: 1.1rem;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 3px solid #ffb3ec;
+  background-color: #fff0f5;
+  margin: 15px 0;
+  transition: border 0.3s ease;
+}
+
+select:focus {
+  border-color: #ff69b4;
+  outline: none;
+  box-shadow: 0 0 10px #ffc0e1;
+}
+
+.rating-container {
+  text-align: center;
+}
+
+.rating-container p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stars input[type="radio"] {
+  display: none;
+}
+
+.stars label {
+  font-size: 2.5rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+  color: #ff69b4;
+  transform: scale(1.2);
+}
