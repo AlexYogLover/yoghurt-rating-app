@@ -32,6 +32,19 @@
       font-size: 1.5em;
       margin-bottom: 10px;
     }
+
+    .stars {
+      color: #f5c518; /* gold */
+      font-size: 1.2em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .rating-text {
+      margin-left: 6px;
+      font-size: 0.95em;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -52,6 +65,14 @@
   </table>
 
   <script>
+    function getStars(rating) {
+      const fullStars = Math.floor(rating);
+      const halfStar = rating - fullStars >= 0.5 ? 1 : 0;
+      const emptyStars = 5 - fullStars - halfStar;
+
+      return '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+    }
+
     fetch('/ratings-db')
       .then(response => response.json())
       .then(data => {
@@ -74,18 +95,25 @@
         });
 
         const averaged = Object.entries(yoghurtMap)
-          .map(([yoghurt, { total, count }]) => ({
-            yoghurt,
-            average: (total / count).toFixed(2),
-            count,
-          }))
-          .sort((a, b) => b.average - a.average);
+          .map(([yoghurt, { total, count }]) => {
+            const avg = total / count;
+            return {
+              yoghurt,
+              average: avg.toFixed(2),
+              averageNum: avg,
+              count,
+            };
+          })
+          .sort((a, b) => b.averageNum - a.averageNum);
 
-        averaged.forEach(({ yoghurt, average, count }) => {
+        averaged.forEach(({ yoghurt, average, averageNum, count }) => {
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${yoghurt}</td>
-            <td>${average}</td>
+            <td>
+              <span class="stars">${getStars(averageNum)}</span>
+              <span class="rating-text">(${average})</span>
+            </td>
             <td>${count}</td>
           `;
           tableBody.appendChild(row);

@@ -1,3 +1,4 @@
+/* General Body Styling */
 body {
   font-family: 'Trebuchet MS', sans-serif;
   background: #fef6ff;
@@ -9,17 +10,19 @@ body {
   align-items: center;
 }
 
+/* Header */
 h1 {
   background: #ffccf9;
   color: #8a0073;
-  font-size: 2.2rem;
-  padding: 15px 30px;
-  border-radius: 25px;
-  box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
-  margin-bottom: 30px;
+  font-size: 2.4rem;
+  padding: 15px 40px;
+  border-radius: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 35px;
   text-shadow: 1px 1px 0 #fff;
 }
 
+/* Labels and Select Dropdown */
 label {
   font-size: 1.2rem;
   font-weight: bold;
@@ -29,19 +32,20 @@ label {
 select {
   font-size: 1.1rem;
   padding: 12px 20px;
-  border-radius: 25px;
-  border: 3px solid #ffb3ec;
+  border-radius: 20px;
+  border: 2px solid #ffb3ec;
   background-color: #fff0f5;
   margin: 15px 0;
-  transition: border 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 select:focus {
   border-color: #ff69b4;
   outline: none;
-  box-shadow: 0 0 10px #ffc0e1;
+  box-shadow: 0 0 8px #ffc0e1;
 }
 
+/* Rating Stars */
 .rating-container {
   text-align: center;
 }
@@ -56,7 +60,7 @@ select:focus {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .stars input[type="radio"] {
@@ -74,5 +78,95 @@ select:focus {
 .stars label:hover ~ label,
 .stars input:checked ~ label {
   color: #ff69b4;
-  transform: scale(1.2);
+  transform: scale(1.1);
+}
+
+/* Submit Button */
+button#submit-btn {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button#submit-btn:hover {
+  background-color: #e0559e;
+  transform: scale(1.05);
+}
+
+/* Status Message */
+#status-msg {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #8a0073;
+}
+
+/* Ratings Table */
+table {
+  width: 90%;
+  max-width: 800px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+caption {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #8a0073;
+  font-weight: bold;
+}
+
+th, td {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f2d7f5;
+  text-align: left;
+  font-size: 1rem;
+}
+
+th {
+  background-color: #ffe1f5;
+  color: #8a0073;
+  font-weight: bold;
+  text-align: center;
+}
+
+td {
+  color: #333;
+}
+
+td .stars {
+  font-size: 1.2rem;
+  color: #ffb3ec;
+}
+
+.rating-text {
+  margin-left: 8px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+    padding: 12px 20px;
+  }
+
+  table {
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    padding: 10px 12px;
+  }
 }
